@@ -1,2 +1,4 @@
-package com.example.resourcesmanager.models;public class Resource {
+package com.example.resourcesmanager.models;
+
+public class Resource {
 }
