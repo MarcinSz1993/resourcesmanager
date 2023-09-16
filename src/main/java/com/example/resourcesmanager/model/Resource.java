@@ -27,4 +27,8 @@ public class Resource {
     @Column(name = "resource_type")
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
