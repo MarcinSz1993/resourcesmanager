@@ -1,10 +1,7 @@
 package com.example.resourcesmanager.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,4 +33,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resource> resources;
+
+    public User(Long id, String name, String lastname, String nickname, LocalDateTime dateOfCreate, LocalDateTime dateOfUpdate, UserType userType) {
+
+
+    }
 }
