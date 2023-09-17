@@ -1,5 +1,6 @@
 package com.example.resourcesmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,10 @@ public class Resource {
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
 
+    @Column(name = "userid")
+    private Long userid;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
