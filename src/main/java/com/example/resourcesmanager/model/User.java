@@ -30,7 +30,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resource> resources;
 
