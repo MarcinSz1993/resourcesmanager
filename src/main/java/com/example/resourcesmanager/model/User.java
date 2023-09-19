@@ -34,8 +34,5 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resource> resources;
 
-    public User(Long id, String name, String lastname, String nickname, LocalDateTime dateOfCreate, LocalDateTime dateOfUpdate, UserType userType) {
 
-
-    }
 }

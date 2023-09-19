@@ -13,5 +13,4 @@ public class ResourceRequest {
     private LocalDateTime dateOfCreation;
     private LocalDateTime dateOfModification;
     private ResourceType resourceType;
-    private Long userid;
 }

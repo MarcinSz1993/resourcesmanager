@@ -6,9 +6,6 @@ import com.example.resourcesmanager.repository.ResourceRepository;
 import com.example.resourcesmanager.request.ResourceRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 
@@ -18,8 +15,8 @@ public class ResourceService {
 
     private final ResourceRepository resourceRepository;
 
-    public Resource addResource(ResourceRequest resourceRequest) {
-        Resource resource = ResourceMapper.toEntity(resourceRequest);
+    public Resource addResource(ResourceRequest resourceRequest, Long userId) {
+        Resource resource = ResourceMapper.toEntity(resourceRequest, userId);
         resource.setDateOfCreate(LocalDateTime.now());
         return resourceRepository.save(resource);
     }
@@ -28,7 +25,8 @@ public class ResourceService {
         resourceRepository.deleteById(fileid);
     }
 
-    public Resource editResourcename(Long fileid, Resource newResourcename) {
+    //Doczytać o @Transactional
+    public Resource editResourceName(Long fileid, Resource newResourcename) {
         Resource editedResource = resourceRepository.findById(fileid).orElseThrow();
         editedResource.setDateOfUpdate(LocalDateTime.now());
         editedResource.setName(newResourcename.getName());

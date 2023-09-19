@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public User addUser(UserDto userDto){
+    public User addUser(UserDto userDto) {
         User user = UserMapper.userDtoToUser(userDto);
         return userRepository.save(user);
     }
@@ -29,17 +29,15 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    public List<UserDto> getUsers(){
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(new Function<User, UserDto>() {
-                    @Override
-                    public UserDto apply(User user) {
-                        return UserMapper.userToUserDto(user);
-                    }
-                })
-                .toList();
+    //Rzucić wyjątek w przypadku braku uprawnień
+    public List<UserDto> getUsers(String username) {
+        if (!isUserSuperUser(username)) {
+            return Collections.emptyList();
+        }
 
+        return userRepository.findAll().stream()
+                .map(UserMapper::toUserDto)
+                .toList();
     }
 
     public User editNickname(Long userid, String newNickname) {
@@ -51,10 +49,13 @@ public class UserService {
     }
 
 
-    public boolean isUserSuperUser(String username){
+    public boolean isUserSuperUser(String username) {
         Optional<User> user = userRepository.findByName(username);
         return user.isPresent() && user.get().getUserType().equals(UserType.SUPER_USER);
     }
+
+
+
 
 
 }
