@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +20,9 @@ public class User {
     @Column(name = "user_name")
     private String name;
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
     @Column(name = "nick_name")
-    private String nickname;
+    private String nickName;
     @Column(name = "date_of_create")
     private LocalDateTime dateOfCreate;
     @Column(name = "date_of_update")

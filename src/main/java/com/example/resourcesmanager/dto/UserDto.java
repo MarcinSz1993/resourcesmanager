@@ -1,16 +1,14 @@
 package com.example.resourcesmanager.dto;
 
 import com.example.resourcesmanager.model.UserType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDto {
     Long id;
     String name;

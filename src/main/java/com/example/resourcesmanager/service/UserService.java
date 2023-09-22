@@ -1,6 +1,7 @@
 package com.example.resourcesmanager.service;
 
 import com.example.resourcesmanager.dto.UserDto;
+import com.example.resourcesmanager.exception.NoPermissionException;
 import com.example.resourcesmanager.mapper.UserMapper;
 import com.example.resourcesmanager.model.User;
 import com.example.resourcesmanager.model.UserType;
@@ -29,10 +30,9 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    //Rzucić wyjątek w przypadku braku uprawnień
     public List<UserDto> getUsers(String username) {
         if (!isUserSuperUser(username)) {
-            return Collections.emptyList();
+            throw new NoPermissionException();
         }
 
         return userRepository.findAll().stream()
@@ -44,7 +44,7 @@ public class UserService {
         Optional<User> existingUser = Optional.of(userRepository.findById(userid).orElseThrow());
         User userEntity = existingUser.get();
         userEntity.setDateOfUpdate(LocalDateTime.now());
-        userEntity.setNickname(newNickname);
+        userEntity.setNickName(newNickname);
         return userRepository.save(userEntity);
     }
 
@@ -53,9 +53,6 @@ public class UserService {
         Optional<User> user = userRepository.findByName(username);
         return user.isPresent() && user.get().getUserType().equals(UserType.SUPER_USER);
     }
-
-
-
 
 
 }

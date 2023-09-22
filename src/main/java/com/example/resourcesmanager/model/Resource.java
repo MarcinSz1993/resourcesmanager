@@ -2,10 +2,7 @@ package com.example.resourcesmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -36,4 +33,14 @@ public class Resource {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    public Resource(String name, LocalDateTime dateOfCreate, LocalDateTime dateOfUpdate, ResourceType resourceType, Long userId) {
+        this.name = name;
+        this.dateOfCreate = dateOfCreate;
+        this.dateOfUpdate = dateOfUpdate;
+        this.resourceType = resourceType;
+        this.userid = userId;
+    }
 }
+

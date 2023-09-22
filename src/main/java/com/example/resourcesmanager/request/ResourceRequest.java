@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ResourceRequest {
-    private Long id;
     private String name;
-    private LocalDateTime dateOfCreation;
-    private LocalDateTime dateOfModification;
+    private LocalDateTime dateOfCreate;
+    private LocalDateTime dateOfUpdate;
     private ResourceType resourceType;
+
 }
