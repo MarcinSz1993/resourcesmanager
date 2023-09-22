@@ -33,7 +33,7 @@ public class ResourceService {
         return resourceRepository.save(resource);
     }
 
-    public void deleteFile(Long fileid){
+    public void deleteResource(Long fileid){
         resourceRepository.deleteById(fileid);
     }
 

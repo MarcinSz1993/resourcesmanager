@@ -1,15 +1,10 @@
 package com.example.resourcesmanager.controller;
 
-import com.example.resourcesmanager.exception.UserNotFoundException;
 import com.example.resourcesmanager.model.Resource;
-import com.example.resourcesmanager.model.User;
-import com.example.resourcesmanager.repository.UserRepository;
 import com.example.resourcesmanager.request.ResourceRequest;
 import com.example.resourcesmanager.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,8 +22,8 @@ public class ResourceController {
     }
 
     @DeleteMapping("/{resourceId}")
-    public void deleteFile(@PathVariable("resourceId") Long fileid) {
-        resourceService.deleteFile(fileid);
+    public void deleteResource(@PathVariable("resourceId") Long resourceId) {
+        resourceService.deleteResource(resourceId);
     }
 
 
