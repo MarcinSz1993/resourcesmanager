@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class NotFoundAdvice {
+public class NoPermissionAdvice {
+
     @ResponseBody
-    @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String userNotFoundHandler(UserNotFoundException ex){
+    @ExceptionHandler(NoPermissionException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String noPermissionHandler(NoPermissionException ex){
         return ex.getMessage();
     }
 }

@@ -7,11 +7,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class NotFoundAdvice {
+public class InvalidDataAdvice {
+//    @ResponseBody
+//    @ExceptionHandler(InvalidDataException.class)
+//    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+//    public String InvalidDataHandler(InvalidDataException ex){
+//        return ex.getMessage();
+//    }
+
     @ResponseBody
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(InvalidDataException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String userNotFoundHandler(UserNotFoundException ex){
+    public String InvalidDataHandler2(InvalidDataException ex){
         return ex.getMessage();
     }
 }

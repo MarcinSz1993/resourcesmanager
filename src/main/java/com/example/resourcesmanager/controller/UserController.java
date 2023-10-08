@@ -10,32 +10,29 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping
     public User addUser(@RequestBody UserDto userDto){
         return userService.addUser(userDto);
     }
 
-    @DeleteMapping("/{userid}")
-    public void deleteUser(@PathVariable("userid") Long userid){
-        userService.deleteUser(userid);
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable("userId") Long userId){
+        userService.deleteUser(userId);
     }
 
-    @PutMapping("/editNickname/{id}")
-    public User editNickname(@PathVariable Long id, @RequestBody String newNickname){
-        return userService.editNickname(id,newNickname);
+    @PutMapping("/{id}")
+    public User editNickName(@PathVariable Long id, @RequestBody String newNickName){
+        return userService.editNickname(id,newNickName);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<UserDto> getUsers(@RequestHeader("Username") String username) {
-        if (userService.isUserSuperUser(username)) {
-            return userService.getUsers();
-        } else
-            return Collections.emptyList();
+        return userService.getUsers(username);
     }
 }

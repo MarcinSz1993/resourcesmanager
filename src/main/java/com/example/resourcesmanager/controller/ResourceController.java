@@ -1,42 +1,33 @@
 package com.example.resourcesmanager.controller;
 
-import com.example.resourcesmanager.exception.UserNotFoundException;
 import com.example.resourcesmanager.model.Resource;
-import com.example.resourcesmanager.model.User;
-import com.example.resourcesmanager.repository.UserRepository;
 import com.example.resourcesmanager.request.ResourceRequest;
 import com.example.resourcesmanager.service.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/resource")
 public class ResourceController {
     private final ResourceService resourceService;
-    private final UserRepository userRepository;
 
-    @PostMapping("/resource")
-    public Resource addResource(@RequestHeader("Username")String username, @RequestBody ResourceRequest resourceRequest) {
-        Optional<User> byName = userRepository.findByName(username);
-        if (byName.isPresent()) {
-            Long id = byName.get().getId();
-            resourceRequest.setUserid(id);
-
-        } else {
-            throw new UserNotFoundException(username);
-        }
-        return resourceService.addResource(resourceRequest);
+    @PostMapping
+    public Resource addResource(
+            @RequestHeader("Username") String username,
+            @RequestBody ResourceRequest resourceRequest
+    ) throws Throwable {
+        return resourceService.addResource(resourceRequest, username);
     }
 
-    @DeleteMapping("/{fileid}")
-    public void deleteFile(@PathVariable("fileid") Long fileid){
-        resourceService.deleteFile(fileid);
+    @DeleteMapping("/{resourceId}")
+    public void deleteResource(@PathVariable("resourceId") Long resourceId) {
+        resourceService.deleteResource(resourceId);
     }
 
-    @PutMapping("/editresourcename/{id}")
-    public Resource editResource(@PathVariable Long id, @RequestBody Resource newResourcename){
-        return resourceService.editResourcename(id,newResourcename);
+
+    @PutMapping("/{id}")
+    public Resource editResource(@PathVariable Long id, @RequestBody String newResourcename) {
+        return resourceService.editResourceName(id, newResourcename);
     }
 }

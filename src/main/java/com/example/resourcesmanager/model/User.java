@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +20,9 @@ public class User {
     @Column(name = "user_name")
     private String name;
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
     @Column(name = "nick_name")
-    private String nickname;
+    private String nickName;
     @Column(name = "date_of_create")
     private LocalDateTime dateOfCreate;
     @Column(name = "date_of_update")
@@ -30,12 +31,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Resource> resources;
 
-    public User(Long id, String name, String lastname, String nickname, LocalDateTime dateOfCreate, LocalDateTime dateOfUpdate, UserType userType) {
 
-
-    }
 }
