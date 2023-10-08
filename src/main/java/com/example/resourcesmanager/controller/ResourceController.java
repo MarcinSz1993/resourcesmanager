@@ -16,8 +16,7 @@ public class ResourceController {
     public Resource addResource(
             @RequestHeader("Username") String username,
             @RequestBody ResourceRequest resourceRequest
-    ) {
-
+    ) throws Throwable {
         return resourceService.addResource(resourceRequest, username);
     }
 

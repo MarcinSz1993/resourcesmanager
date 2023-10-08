@@ -41,6 +41,7 @@ public class Resource {
         this.dateOfUpdate = dateOfUpdate;
         this.resourceType = resourceType;
         this.userid = userId;
+        setDateOfCreate(LocalDateTime.now());
     }
 }
 

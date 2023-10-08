@@ -33,7 +33,6 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getUsers(@RequestHeader("Username") String username) {
-
-            return userService.getUsers(username);
+        return userService.getUsers(username);
     }
 }

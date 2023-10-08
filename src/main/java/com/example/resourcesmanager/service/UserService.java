@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +30,7 @@ public class UserService {
     }
 
     public List<UserDto> getUsers(String username) {
-        if (!isUserSuperUser(username)) {
+        if (!isSuperUser(username)) {
             throw new NoPermissionException();
         }
 
@@ -49,7 +48,7 @@ public class UserService {
     }
 
 
-    public boolean isUserSuperUser(String username) {
+    public boolean isSuperUser(String username) {
         Optional<User> user = userRepository.findByName(username);
         return user.isPresent() && user.get().getUserType().equals(UserType.SUPER_USER);
     }
